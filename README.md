@@ -111,32 +111,6 @@ FastAPI MVP-сервис
 
 ---
 
-## Рекомендуемая структура репозитория
-
-Если репозиторий расширяется экспериментальными ноутбуками и результатами, рекомендуется такая структура:
-
-```text
-LLM_PREFER_DIPLOMA_WORK/
-├── data/
-│   ├── prompts_ru.jsonl
-│   ├── prompts_en.jsonl
-│   └── gold_slots.jsonl
-├── notebooks/
-│   ├── 01_zero_shot_eval.ipynb
-│   ├── 02_ru_en_gap_analysis.ipynb
-│   └── 03_error_analysis.ipynb
-├── results/
-│   ├── model_comparison.csv
-│   ├── fact_scores.csv
-│   └── qualitative_errors.md
-├── src/
-│   ├── evaluate_models.py
-│   ├── metrics.py
-│   └── prompts.py
-└── README.md
-```
-
----
 
 ## Установка окружения
 
@@ -153,38 +127,3 @@ pip install torch transformers accelerate pandas numpy tqdm scikit-learn jupyter
 ```bash
 huggingface-cli login
 ```
-
----
-
-## Пример запуска оценки
-
-Примерный сценарий для будущего скрипта:
-
-```bash
-python src/evaluate_models.py \
-  --model meta-llama/Meta-Llama-3.1-8B-Instruct \
-  --prompts data/prompts_ru.jsonl \
-  --output results/llama_ru_eval.csv
-```
-
----
-
-## Формат тестового примера
-
-```json
-{
-  "id": "iscn_001",
-  "iscn": "47,XY,+21",
-  "language": "ru",
-  "expected_slots": {
-    "sex_chromosomes": "XY",
-    "chromosome_count": 47,
-    "anomaly_type": "aneuploidy",
-    "affected_chromosome": "21"
-  },
-  "prompt": "Интерпретируй кариотип 47,XY,+21 на русском языке."
-}
-```
-
----
-
